@@ -1,6 +1,17 @@
 # 🔄 Cohort Analysis & Customer Retention Dynamics
 
-An advanced behavioral analytics project utilizing cohort modeling to track customer retention rates and lifetime value metrics across B2B/B2C segments, demographic profiles, and first-purchase categories.
+> 🌐 **Portfolio Case Study:** [View full Case Study & Bias Fix Notes →](https://aominhtam-portfolio.vercel.app/projects/cohort-retention.html)
+
+A behavioral analytics case study using time-based cohort modeling to evaluate customer retention rates across B2B/B2C segments, income tiers, and first-purchase categories while fixing left-truncation bias.
+
+---
+
+## 📦 Dataset & Scope
+
+* **Project Type:** Personal Project / Simulated Business Case
+* **Dataset Source:** Simulated E-Commerce CSVs (`EcomSales`, `Customer`, `Product`, `Region`)
+* **Scale & Range:** `51,290` line-items (`25,728` unique `OrderID`s, `17,415` customers; Jan 2020 – Dec 2023 global anchor, USD)
+* **Cohort Window:** 2022 monthly acquisition cohorts anchored globally against `2020–2023` purchase history.
 
 ---
 
@@ -28,29 +39,28 @@ An advanced behavioral analytics project utilizing cohort modeling to track cust
 
 ## 📈 3. Key Findings & Insights
 
-### 1. The Month-1 Churn Crisis
-* **Acquisition:** Q1 generated strong top-of-funnel acquisition, but onboarding failed to convert them into habitual buyers.
-* **Retention Drop:** Month-1 retention rate plummets dramatically to a **1% - 3%** baseline across the board. The platform suffers from a critical post-purchase engagement void.
+### 1. The Month-1 Churn Cliff
+* **Acquisition vs. Repeat Purchase:** Q1 generated strong acquisition volume, yet Month-1 repeat purchase rates drop sharply to a **1% – 3%** baseline across 2022 cohorts—highlighting an early post-purchase retention gap worth testing via lifecycle onboarding (clickstream engagement itself is not directly measured in order logs).
 
 ### 2. Segment Dynamics (Corporate vs. Consumer)
-* **Corporate (B2B):** Exhibits structural cyclicality. We observe retention "bumps" (reaching 5%-6%) at Month 5 and Month 8, indicating predictable inventory restock cycles.
-* **Consumer (B2C):** Highly erratic purchasing behavior with extremely low baseline loyalty.
+* **Corporate (B2B — Sample Caveat):** Exhibits observable retention bumps (`5% – 6%`) around Month 5 and Month 8, suggesting periodic inventory restock cycles; because the B2B cohort base is smaller than B2C, stability should be monitored across future cohorts.
+* **Consumer (B2C):** Low baseline repeat frequency compared to corporate accounts.
 
 ### 3. The Income Profitability Paradox
-* **Low-Income Bracket (The Cash Cow):** Despite yielding the lowest Average Order Value (AOV) per transaction, their high volume and consistency generate the largest and most stable cumulative profit stream (Sum Profit).
-* **High-Income Bracket (The Cash Grab):** These customers boast exceptional transaction efficiency (highest Mean Profit per order) but exhibit the worst return rates.
+* **Low-Income Bracket:** Despite yielding lower AOV per order, high order volume and consistency generate the largest cumulative profit stream (`Profit` sum).
+* **High-Income Bracket:** Highest mean `Profit` per transaction, yet lower repurchase retention rates.
 
 ---
 
-## 🚀 4. Strategic Recommendations
+## 🚀 4. Proposed Retention Experiments & Measurement
 
-1. **Implement an Automated Post-Purchase Sequence:** Deploy an automated "Subscribe & Save" or proactive email nurture sequence triggering at Day 20-25 to combat the catastrophic Month-1 churn rate.
-2. **B2B Lifecycle Management:** Integrate CRM alerts for the Corporate sales team to proactively dial B2B accounts at the 4-month and 7-month marks, capitalizing on their proven restock rhythm.
-3. **Upsell Optimization:** Given the High-Income segment's tendency for single-purchase "hit-and-runs", immediately optimize the first-visit cart experience with aggressive premium cross-sells to maximize initial capture value.
+1. **Automated Post-Purchase Nurture:** Pilot an automated "Subscribe & Save" or re-engagement sequence at Day 20–25 to test lift over the observed Month-1 drop-off baseline.
+2. **B2B Restock CRM Alerts:** Schedule outbound prompts for Corporate account managers at Months 4 and 7 ahead of the observed Month 5 / Month 8 B2B cycle.
+3. **First-Session Cart Cross-Sells:** Test first-order bundle incentives for high-income buyers where single-order margin is high, measuring **Month-1 & Month-3 Retention Rate**, **B2B Reorder Conversion**, and **Contribution Margin After Discount** against holdout groups.
 
 ---
 
-## 🛠️ 5. Challenges, Technical Debt & Bug Fixes
+## 🛠️ 5. Methodology & Analysis Fixes
 
 During the analytical sprint and peer code review, several data logic issues and architectural bottlenecks were systematically audited and resolved:
 
@@ -86,7 +96,7 @@ During the analytical sprint and peer code review, several data logic issues and
 ### Environment Setup
 ```bash
 # Clone the repository
-git clone [https://github.com/AOMINHTAM/cohort-retention-analysis.git](https://github.com/AOMINHTAM/cohort-retention-analysis.git)
+git clone https://github.com/AOMINHTAM/cohort-retention-analysis.git
 cd cohort-retention-analysis
 
 # Create and activate virtual environment
@@ -95,3 +105,4 @@ python -m venv venv
 
 # Install dependencies
 pip install -r requirements.txt
+```
